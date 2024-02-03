@@ -2,7 +2,7 @@ import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Main from "./pages/Main";
-import UsageHistory from "./pages/Usage-history"
+import UsageHistory from "./pages/UsageHistory"
 
 const router = createBrowserRouter([
   {

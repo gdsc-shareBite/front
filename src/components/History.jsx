@@ -1,5 +1,27 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+
+
+function History({historyDate="1/11",postTitle="title"}) {
+  
+  return <>
+    <HistoryBox>
+        <HistoryImg src="" alt="-"/>
+        <Contents>
+          <HistoryDate>{historyDate}</HistoryDate>
+          <Link to={`/posts/:id`}>{postTitle}</Link>
+          <HistoryTitle></HistoryTitle>
+          <BtnBox>
+            <AcceptBtn>Accept</AcceptBtn>
+            <RejectBtn>Reject</RejectBtn>
+          </BtnBox>
+          
+        </Contents>
+       
+    </HistoryBox>
+  </>;
+}
 
 const HistoryBox = styled.div`
   width: 75vw;
@@ -23,7 +45,7 @@ font-size: 12px;
 color: #5d5d5d;
 margin-bottom: 8px;
 `;
-const HistoryTitle = styled.span`
+const HistoryTitle = styled(Link)`
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 16px;
@@ -65,23 +87,5 @@ const RejectBtn = styled(Btn)`
   }
 `;
 
-
-function History({historyDate="1/11",postTitle="title"}) {
-  return <>
-    <HistoryBox>
-        <HistoryImg src="" alt="-"/>
-        <Contents>
-          <HistoryDate>{historyDate}</HistoryDate>
-          <HistoryTitle>{postTitle}</HistoryTitle>
-          <BtnBox>
-            <AcceptBtn>Accept</AcceptBtn>
-            <RejectBtn>Reject</RejectBtn>
-          </BtnBox>
-          
-        </Contents>
-       
-    </HistoryBox>
-  </>;
-}
 
 export default History;

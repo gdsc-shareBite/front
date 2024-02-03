@@ -99,9 +99,6 @@ const ReservationBox = styled.div`
 const ProgressBox = styled(ReservationBox)``;
 const CompletionBox = styled(ReservationBox)``;
 
-
-
-
 function UsageHistory() {
 
   const data = [
