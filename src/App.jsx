@@ -4,7 +4,7 @@ import Root from "./Root";
 import Main from "./pages/Main";
 import PostList from "./pages/PostList";
 import NotFound from "./components/NotFound";
-import ProductDetail from "./pages/ProductDetail";
+import PostDetail from "./pages/PostDetail";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
       },
       {
         path: "posts/:id",
-        element: <ProductDetail />,
+        element: <PostDetail />,
       },
     ],
   },

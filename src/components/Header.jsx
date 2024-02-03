@@ -16,7 +16,7 @@ export default function Header() {
           MyPage
         </Link>
         <Button>LOGIN</Button>
-        <Button color="#35314c" text="white">
+        <Button color="#35314c" textColor="white">
           SIGN UP
         </Button>
       </Nav>
@@ -42,7 +42,7 @@ const Button = styled.button`
   border-radius: 10%;
   border: 0px;
   background-color: ${(props) => props.color || "#cdcdcd"};
-  color: ${(props) => props.text || "black"};
+  color: ${(props) => props.textColor || "black"};
   padding: 10px;
   cursor: pointer;
 `;
