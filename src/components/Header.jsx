@@ -10,9 +10,9 @@ export default function Header() {
       </Link>
       <Nav>
         <Link to="/posts">Post</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/history">History</Link>
-        <Link to="/mypage" style={{ marginRight: "40px" }}>
+        <Link to="/">Register</Link>
+        <Link to="/">History</Link>
+        <Link to="/" style={{ marginRight: "40px" }}>
           MyPage
         </Link>
         <Button>LOGIN</Button>
@@ -34,7 +34,7 @@ const HeaderBar = styled.header`
 
 const Nav = styled.nav`
   display: flex;
-  gap: 20px;
+  gap: 12px;
   align-items: center;
 `;
 

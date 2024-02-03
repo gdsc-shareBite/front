@@ -2,7 +2,7 @@ import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Main from "./pages/Main";
-import Post from "./pages/Post";
+import PostList from "./pages/PostList";
 import NotFound from "./components/NotFound";
 import ProductDetail from "./pages/ProductDetail";
 import { createGlobalStyle } from "styled-components";
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: "posts",
-        element: <Post />,
+        element: <PostList />,
       },
       {
         path: "posts/:id",
