@@ -44,6 +44,7 @@ const Button = styled.button`
   background-color: ${(props) => props.color || "#cdcdcd"};
   color: ${(props) => props.textColor || "black"};
   padding: 10px;
+  font-weight: bolder;
   cursor: pointer;
 `;
 

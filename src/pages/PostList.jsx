@@ -1,21 +1,36 @@
 import React from "react";
 import styled from "styled-components";
 import Post from "../components/Post";
-import TestImage from "../assets/images/testImage.jpg";
+import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 
 export default function PostList() {
+  const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
+  const position = { lat: 53.54992, lng: 10.006788 };
+
   return (
     <Div>
-      <image src={TestImage} />
-      <div>Map</div>
-      <div>
+      {/* <APIProvider apiKey={apiKey}>
+        <Map
+          zoom={3}
+          center={{ lat: 22.54992, lng: 0 }}
+          gestureHandling={"greedy"}
+          disableDefaultUI={true}
+        />
+      </APIProvider> */}
+      <List>
         <Post />
-      </div>
+        <Post />
+        <Post />
+      </List>
     </Div>
   );
 }
 
 const Div = styled.div`
-  background-color: red;
   display: flex;
+  padding: 50px 30px 50px;
+`;
+
+const List = styled.div`
+  margin: auto;
 `;
