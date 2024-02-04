@@ -3,8 +3,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Main from "./pages/Main";
 import Post from "./pages/Post";
+import Register from "./pages/Register";
 import NotFound from "./components/NotFound";
 import ProductDetail from "./pages/ProductDetail";
+import MyPage from "./pages/Mypage";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -59,6 +61,14 @@ const router = createBrowserRouter([
       {
         path: "posts/:id",
         element: <ProductDetail />,
+      },
+      {
+        path: "mypage",
+        element: <MyPage />,
+      },
+      {
+        path: "register",
+        element: <Register />,
       },
     ],
   },
