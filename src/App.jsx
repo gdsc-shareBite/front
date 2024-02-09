@@ -8,6 +8,9 @@ import Register from "./pages/Register";
 import NotFound from "./components/NotFound";
 import ProductDetail from "./pages/ProductDetail";
 import MyPage from "./pages/Mypage";
+import PostList from "./pages/PostList";
+import NotFound from "./components/NotFound";
+import PostDetail from "./pages/PostDetail";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -60,11 +63,11 @@ const router = createBrowserRouter([
       },
       {
         path: "posts",
-        element: <Post />,
+        element: <PostList />,
       },
       {
         path: "posts/:id",
-        element: <ProductDetail />,
+        element: <PostDetail />,
       },
       {
         path: "mypage",
