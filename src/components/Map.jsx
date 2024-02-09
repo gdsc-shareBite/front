@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import styled from "styled-components";
+import { ScaleLoader } from "react-spinners";
 
 export default function Map() {
   const [location, setLocation] = useState();
@@ -42,11 +43,22 @@ export default function Map() {
       <></>
     </GoogleMap>
   ) : (
-    <Loading>Loading....</Loading>
+    <Loading>
+      <ScaleLoader
+        height={100}
+        width={4}
+        margin={5}
+        style={{ marginBottom: "120px" }}
+        color="#36d7b7"
+      />
+    </Loading>
   );
 }
 
 const Loading = styled.div`
   width: 710px;
   height: 858px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
