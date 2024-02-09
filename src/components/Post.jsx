@@ -2,11 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import TestImage from "../assets/images/testImage.jpg";
 import { FaStar, FaMapMarkerAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-export default function Post({ photo, rating, name, location, author }) {
-  console.log(TestImage);
+export default function Post({
+  product,
+  product: { id, thumbnail, photos, rating, name, location, author },
+}) {
+  const naviagte = useNavigate();
+
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={() => {
+        naviagte(`/posts/${id}`, { state: { product } });
+      }}
+    >
       <ImageWrapper>
         <Image src={TestImage} alt="restaurantName" />
       </ImageWrapper>
@@ -35,6 +44,7 @@ const Wrapper = styled.div`
   border-radius: 15px;
   width: 478px;
   margin-bottom: 30px;
+  cursor: pointer;
 `;
 
 const Title = styled.h3`

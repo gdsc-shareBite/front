@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Post from "../components/Post";
-import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
+import Map from "../components/Map";
 
 export default function PostList() {
   const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
@@ -17,10 +17,11 @@ export default function PostList() {
           disableDefaultUI={true}
         />
       </APIProvider> */}
+      <Map />
       <List>
-        <Post />
-        <Post />
-        <Post />
+        <Post product={{ id: 1 }} />
+        <Post product={{ id: 2 }} />
+        <Post product={{ id: 3 }} />
       </List>
     </Div>
   );
@@ -28,9 +29,10 @@ export default function PostList() {
 
 const Div = styled.div`
   display: flex;
+  justify-content: center;
   padding: 50px 30px 50px;
 `;
 
 const List = styled.div`
-  margin: auto;
+  margin-left: 100px;
 `;
