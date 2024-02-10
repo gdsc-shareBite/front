@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {styled,} from "styled-components";
 import History from "../components/History";
+import axios from "axios";
 
 /* 
 1) state props에 따라 보여주는 버튼이 다름 <<
@@ -12,32 +13,53 @@ export default function UsageHistory() {
   /* 예약신청: "RESERVATING"  진행중:"PROGRESSING" 완료:"COMPLETED "*/
   const data = [
     {
+      id:1,
       state: "RESERVATING",
       title:"this is title",
       imgSrc:"--",
       date:"1/1",
     },{
+      id:2,
       state: "RESERVATING",
       title:"hi",
       imgSrc:"--",
       date:"1/2",
     },{
+      id:3,
       state: "PROGRESSING",
       title:"빵",
       imgSrc:"--",
       date:"1/3",
     },{
+      id:4,
       state: "COMPLETED",
       title:"케이크",
       imgSrc:"--",
       date:"1/4",
     },{
+      id:5,
       state: "COMPLETED",
       title:"도넛",
       imgSrc:"--",
       date:"1/5",
     },
   ];
+
+  const [historys, setHistorys] = useState(data);
+  
+  useEffect(() => {
+    // Fetch usage history data from the server
+    async function fetchHistorys() {
+      try {
+        const response = await axios.get('/api/usage-history');
+        setHistorys(response.data);
+      } catch (error) {
+        console.error('Error fetching usage history:', error);
+      }
+    }
+
+    fetchHistorys();
+  }, []);
 
   return <>
     <Wrapper>
@@ -46,21 +68,21 @@ export default function UsageHistory() {
       <Container>
         <Subtitle>예약 신청</Subtitle>
         <ReservationBox>
-          {data.map((history)=> history.state === "RESERVATING" &&
-          <History history={history}/>)}
+          {historys.map((history)=> history.state === "RESERVATING" &&
+          <History history={history} setHistorys={setHistorys}/>)}
         </ReservationBox>
         <Hr />
 
         <Subtitle>진행 중</Subtitle>
         <ProgressBox>
-          {data.map((history)=> history.state === "PROGRESSING" &&
-          <History history={history}/>)}
+          {historys.map((history)=> history.state === "PROGRESSING" &&
+          <History history={history} setHistorys={setHistorys}/>)}
           </ProgressBox>
         <Hr />
 
         <Subtitle>거래 완료</Subtitle>
         <CompletionBox>
-          {data.map((history)=> history.state === "COMPLETED" &&
+          {historys.map((history)=> history.state === "COMPLETED" &&
           <History history={history}/>)}
           </CompletionBox>
         

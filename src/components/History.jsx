@@ -4,36 +4,59 @@ import styled from "styled-components";
 
 
 
-function History({history}) {
+function History({history, setHistorys}) {
+  const {id, state, title, imgSrc, date,} = history;
+
+  const makeNewHistory = (newState) => {
+    const newHistory = {
+      state:newState,
+      id,title,imgSrc,date
+    };
+    setHistorys((prev)=>{
+      return prev.map(
+        (oldHistory)=>
+        oldHistory.id === newHistory.id ? newHistory : oldHistory
+        )});
+  }
+  const removeHistory = () => {
+    setHistorys((prev)=>{
+      return prev.filter(history=>history.id !==id);
+    });
+  }
+
   const handleAccept = () =>{
+    makeNewHistory("PROGRESSING");
+    
   }
   const handleDecline = () =>{
+    removeHistory();
+  }
+
+  const handleConfirm = () => {
+   makeNewHistory("COMPLETED");
+  }
+  const handleDoNotVisit = ()=>{
+    removeHistory();
   }
 
   return <>
     <HistoryBox>
         <HistoryImg src="" alt="-"/>
         <Contents>
-          <HistoryDate>{history.date}</HistoryDate>
-          <Link to={`/posts/`}>{history.title}</Link>
-          {history.state === "RESERVATING" &&
+          <HistoryDate>{date}</HistoryDate>
+          <Link to={`/posts/`}>{title}</Link>
+          {state === "RESERVATING" &&
             <BtnWrapper>
               <AcceptBtn onClick={() => handleAccept()}>Accept</AcceptBtn>
-              <DeclineBtn onClick={() => handleDecline()}>Reject</DeclineBtn>
+              <DeclineBtn onClick={() => handleDecline()}>Decline</DeclineBtn>
             </BtnWrapper>}
-          {history.state === "PROGRESSING" &&
+          {state === "PROGRESSING" &&
             <BtnWrapper>
-              <AcceptBtn>Confirm</AcceptBtn>
-              <DeclineBtn>Not Visited</DeclineBtn>
+              <AcceptBtn onClick={() => handleConfirm()}>Confirm</AcceptBtn>
+              <DeclineBtn onClick={() => handleDoNotVisit()}>Not Visited</DeclineBtn>
             </BtnWrapper>}
-          {history.state === "COMPLETED" &&
-            <BtnWrapper>
-              
-            </BtnWrapper>}
+          {state === "COMPLETED" && <></>}
             
-          
-          
-          
         </Contents>
        
     </HistoryBox>
