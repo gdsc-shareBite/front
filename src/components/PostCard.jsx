@@ -4,7 +4,7 @@ import TestImage from "../assets/images/testImage.jpg";
 import { FaStar, FaMapMarkerAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-export default function Post({
+export default function PostCard({
   product,
   product: { id, thumbnail, photos, rating, name, location, author },
 }) {
