@@ -3,19 +3,36 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
-function History({historyDate="1/11",postTitle="title"}) {
-  
+
+function History({history}) {
+  const handleAccept = () =>{
+  }
+  const handleDecline = () =>{
+  }
+
   return <>
     <HistoryBox>
         <HistoryImg src="" alt="-"/>
         <Contents>
-          <HistoryDate>{historyDate}</HistoryDate>
-          <Link to={`/posts/:id`}>{postTitle}</Link>
-          <HistoryTitle></HistoryTitle>
-          <BtnBox>
-            <AcceptBtn>Accept</AcceptBtn>
-            <RejectBtn>Reject</RejectBtn>
-          </BtnBox>
+          <HistoryDate>{history.date}</HistoryDate>
+          <Link to={`/posts/`}>{history.title}</Link>
+          {history.state === "RESERVATING" &&
+            <BtnWrapper>
+              <AcceptBtn onClick={() => handleAccept()}>Accept</AcceptBtn>
+              <DeclineBtn onClick={() => handleDecline()}>Reject</DeclineBtn>
+            </BtnWrapper>}
+          {history.state === "PROGRESSING" &&
+            <BtnWrapper>
+              <AcceptBtn>Confirm</AcceptBtn>
+              <DeclineBtn>Not Visited</DeclineBtn>
+            </BtnWrapper>}
+          {history.state === "COMPLETED" &&
+            <BtnWrapper>
+              
+            </BtnWrapper>}
+            
+          
+          
           
         </Contents>
        
@@ -58,7 +75,7 @@ const HistoryImg = styled.img`
   margin-left: 20px;
 `;
 
-const BtnBox = styled.div`
+const BtnWrapper = styled.div`
 width: 300px;
 `;
 const Btn = styled.button`
@@ -78,7 +95,7 @@ const Btn = styled.button`
 `;
 
 const AcceptBtn = styled(Btn)``;
-const RejectBtn = styled(Btn)`
+const DeclineBtn = styled(Btn)`
   color: white;
   background-color: #555657;
   border: 0px solid white;

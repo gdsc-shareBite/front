@@ -1,63 +1,74 @@
 import React from "react";
-import {styled,createGlobalStyle} from "styled-components";
+import {styled,} from "styled-components";
 import History from "../components/History";
 
-const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
+/* 
+1) state props에 따라 보여주는 버튼이 다름 <<
+2) 수락->진행 중 / 거절->history 삭제
+3) 확정->거래완료 / not visited->history 삭제
+*/
+export default function UsageHistory() {
 
-  html, body, div, span, applet, object, iframe,
-  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-  a, abbr, acronym, address, big, cite, code,
-  del, dfn, em, img, ins, kbd, q, s, samp,
-  small, strike, strong, sub, sup, tt, var,
-  b, u, i, center,
-  dl, dt, dd, ol, ul, li,
-  fieldset, form, label, legend,
-  table, caption, tbody, tfoot, thead, tr, th, td,
-  article, aside, canvas, details, embed, 
-  figure, figcaption, footer, header, hgroup, 
-  menu, nav, output, ruby, section, summary,
-  time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-  }
-  /* HTML5 display-role reset for older browsers */
-  article, aside, details, figcaption, figure, 
-  footer, header, hgroup, menu, nav, section {
-    display: block;
-  }
-  
-  ol, ul {
-    list-style: none;
-  }
-  blockquote, q {
-    quotes: none;
-  }
-  blockquote:before, blockquote:after,
-  q:before, q:after {
-    content: '';
-    content: none;
-  }
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
-  a{
-    text-decoration: none;
-    color: inherit;
-  }
-  *{
-    box-sizing:border-box
-    }
-  body {
-    line-height: 1;
-    font-family: 'Source Sans Pro', sans-serif;
-  }
-`;
+  /* 예약신청: "RESERVATING"  진행중:"PROGRESSING" 완료:"COMPLETED "*/
+  const data = [
+    {
+      state: "RESERVATING",
+      title:"this is title",
+      imgSrc:"--",
+      date:"1/1",
+    },{
+      state: "RESERVATING",
+      title:"hi",
+      imgSrc:"--",
+      date:"1/2",
+    },{
+      state: "PROGRESSING",
+      title:"빵",
+      imgSrc:"--",
+      date:"1/3",
+    },{
+      state: "COMPLETED",
+      title:"케이크",
+      imgSrc:"--",
+      date:"1/4",
+    },{
+      state: "COMPLETED",
+      title:"도넛",
+      imgSrc:"--",
+      date:"1/5",
+    },
+  ];
+
+  return <>
+    <Wrapper>
+      <Title>History</Title>
+      
+      <Container>
+        <Subtitle>예약 신청</Subtitle>
+        <ReservationBox>
+          {data.map((history)=> history.state === "RESERVATING" &&
+          <History history={history}/>)}
+        </ReservationBox>
+        <Hr />
+
+        <Subtitle>진행 중</Subtitle>
+        <ProgressBox>
+          {data.map((history)=> history.state === "PROGRESSING" &&
+          <History history={history}/>)}
+          </ProgressBox>
+        <Hr />
+
+        <Subtitle>거래 완료</Subtitle>
+        <CompletionBox>
+          {data.map((history)=> history.state === "COMPLETED" &&
+          <History history={history}/>)}
+          </CompletionBox>
+        
+      </Container>
+      
+    </Wrapper>
+  </>;
+}
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -98,69 +109,3 @@ const ReservationBox = styled.div`
 `;
 const ProgressBox = styled(ReservationBox)``;
 const CompletionBox = styled(ReservationBox)``;
-
-function UsageHistory() {
-
-  const data = [
-    {
-      position: 1,
-      title:"this is title",
-      imgSrc:"--",
-      date:"1/1",
-    },{
-      position: 1,
-      title:"hi",
-      imgSrc:"--",
-      date:"1/2",
-    },{
-      position: 2,
-      title:"빵",
-      imgSrc:"--",
-      date:"1/3",
-    },{
-      position: 3,
-      title:"케이크",
-      imgSrc:"--",
-      date:"1/4",
-    },{
-      position: 3,
-      title:"도넛",
-      imgSrc:"--",
-      date:"1/5",
-    },
-  ];
-  return <>
-  <GlobalStyle />
-    <Wrapper>
-      <Title>History</Title>
-      
-      <Container>
-        <Subtitle>예약 신청</Subtitle>
-        <ReservationBox>
-        {data.map((history)=> history.position === 1 ?
-          <History postTitle={history.title} historyDate={history.date}/> : null)}
-        </ReservationBox>
-        <Hr />
-
-        <Subtitle>진행 중</Subtitle>
-        <ProgressBox>
-          
-        {data.map((history)=> history.position === 2 ?
-          <History postTitle={history.title} historyDate={history.date}/> : null)}
-        </ProgressBox>
-        <Hr />
-
-        <Subtitle>거래 완료</Subtitle>
-        <CompletionBox>
-          
-        {data.map((history)=> history.position === 3 ?
-          <History postTitle={history.title} historyDate={history.date}/> : null)}
-        </CompletionBox>
-        
-      </Container>
-      
-    </Wrapper>
-  </>;
-}
-
-export default UsageHistory;
