@@ -2,15 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+/* dayjs 설정 */
+import dayjs from 'dayjs';
+import isLeapYear from 'dayjs/plugin/isLeapYear'; // 윤년 판단 플러그인
+import 'dayjs/locale/ko';
 
+dayjs.extend(isLeapYear);
+dayjs.locale('ko');
 
 function History({history, setHistorys}) {
-  const {id, state, title, imgSrc, date,} = history;
-
-  const makeNewHistory = (newState) => {
+  const {id, state, title, imgSrc, date, name} = history;
+  
+  //history 진행 상태 변경 함수
+  const handleChangeState = (newState) => {
     const newHistory = {
       state:newState,
-      id,title,imgSrc,date
+      date:dayjs(new Date()).format('MM/DD hh:mm:ss'),
+      id,title,imgSrc,name,
     };
     setHistorys((prev)=>{
       return prev.map(
@@ -18,44 +26,50 @@ function History({history, setHistorys}) {
         oldHistory.id === newHistory.id ? newHistory : oldHistory
         )});
   }
-  const removeHistory = () => {
+
+  //취소시 history 삭제 함수
+  const handleRemoveHistory = () => {
     setHistorys((prev)=>{
       return prev.filter(history=>history.id !==id);
     });
   }
 
-  const handleAccept = () =>{
-    makeNewHistory("PROGRESSING");
-    
-  }
-  const handleDecline = () =>{
-    removeHistory();
-  }
-
-  const handleConfirm = () => {
-   makeNewHistory("COMPLETED");
-  }
-  const handleDoNotVisit = ()=>{
-    removeHistory();
+  const handleStateName = (state) => {
+    switch(state){
+      case "RESERVATING":
+        return "Reserved";
+      case "PROGRESSING":
+        return "Accepted";
+      case "COMPLETED":
+        return "Completed";
+      default:
+        return "";
+    }
   }
 
   return <>
     <HistoryBox>
         <HistoryImg src="" alt="-"/>
         <Contents>
-          <HistoryDate>{date}</HistoryDate>
-          <Link to={`/posts/`}>{title}</Link>
-          {state === "RESERVATING" &&
-            <BtnWrapper>
-              <AcceptBtn onClick={() => handleAccept()}>Accept</AcceptBtn>
-              <DeclineBtn onClick={() => handleDecline()}>Decline</DeclineBtn>
-            </BtnWrapper>}
-          {state === "PROGRESSING" &&
-            <BtnWrapper>
-              <AcceptBtn onClick={() => handleConfirm()}>Confirm</AcceptBtn>
-              <DeclineBtn onClick={() => handleDoNotVisit()}>Not Visited</DeclineBtn>
-            </BtnWrapper>}
-          {state === "COMPLETED" && <></>}
+          <DetailWrapper>
+            <HistoryDate>{date}</HistoryDate>
+            <HistoryState>{handleStateName(state)}</HistoryState>
+          </DetailWrapper>
+          <TitleWrapper>
+            <HistoryTitleLink to={`/posts/`}>{title}</HistoryTitleLink>
+            <UserName>{"- "+name}</UserName>
+          </TitleWrapper>
+            {state === "RESERVATING" &&
+              <BtnWrapper>
+                <AcceptBtn onClick={() => handleChangeState("PROGRESSING")}>Accept</AcceptBtn>
+                <DeclineBtn onClick={handleRemoveHistory}>Decline</DeclineBtn>
+              </BtnWrapper>}
+            {state === "PROGRESSING" &&
+              <BtnWrapper>
+                <AcceptBtn onClick={() => handleChangeState("COMPLETED")}>Confirm</AcceptBtn>
+                <DeclineBtn onClick={handleRemoveHistory}>Not Visited</DeclineBtn>
+              </BtnWrapper>}
+            {state === "COMPLETED" && <></>}
             
         </Contents>
        
@@ -80,15 +94,30 @@ const Contents = styled.div`
   
   margin: 10px 20px;
 `;
+const DetailWrapper = styled.div`
+`;
 const HistoryDate = styled.span`
 font-size: 12px;
 color: #5d5d5d;
 margin-bottom: 8px;
 `;
-const HistoryTitle = styled(Link)`
+
+const HistoryState = styled(HistoryDate)`
+margin-left: 8px;
+`;
+
+const TitleWrapper = styled.div`
+display: flex;
+align-items: center;
+`;
+
+const UserName = styled(HistoryDate)`
+margin-left: 20px;
+`;
+
+const HistoryTitleLink = styled(Link)`
   font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 `;
 const HistoryImg = styled.img`
   height: 80px;

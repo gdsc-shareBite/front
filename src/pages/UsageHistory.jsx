@@ -17,31 +17,43 @@ export default function UsageHistory() {
       state: "RESERVATING",
       title:"this is title",
       imgSrc:"--",
-      date:"1/1",
+      date:"02/11 10:09",
+      name:"닉네임"
     },{
       id:2,
       state: "RESERVATING",
       title:"hi",
       imgSrc:"--",
-      date:"1/2",
+      date:"02/11 10:10",
+      name:"선정민",
+    },{
+      id:6,
+      state: "RESERVATING",
+      title:"커피",
+      imgSrc:"--",
+      date:"02/10 10:11",
+      name:"정소은",
     },{
       id:3,
       state: "PROGRESSING",
       title:"빵",
       imgSrc:"--",
-      date:"1/3",
+      date:"02/11 10:12",
+      name:"주성천",
     },{
       id:4,
       state: "COMPLETED",
       title:"케이크",
       imgSrc:"--",
-      date:"1/4",
+      date:"02/11 10:20",
+      name:"강조은",
     },{
       id:5,
       state: "COMPLETED",
       title:"도넛",
       imgSrc:"--",
-      date:"1/5",
+      date:"02/11 10:30",
+      name:"닉네임",
     },
   ];
 

@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-
-
+/* Cancel 시 목록에서 삭제할지, 거래완료에 넣을지(-취소됨)*/
 
 export default function UserHistory({history, setHistorys}) {
   const {id, state, title, imgSrc, date,} = history;
