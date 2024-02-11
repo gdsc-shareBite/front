@@ -29,9 +29,16 @@ function History({history, setHistorys}) {
 
   //취소시 history 삭제 함수
   const handleRemoveHistory = () => {
-    setHistorys((prev)=>{
-      return prev.filter(history=>history.id !==id);
-    });
+    //취소시 재확인
+    if (window.confirm("Are you sure you want to cancel it?")) {
+      setHistorys((prev)=>{
+        return prev.filter(history=>history.id !==id);
+      });
+      alert("Deleted.");
+    } else {
+      alert("It has been canceled.");
+    }
+    
   }
 
   const handleStateName = (state) => {
@@ -45,9 +52,6 @@ function History({history, setHistorys}) {
       default:
         return "";
     }
-  }
-  const handleTitleLength = () => {
-
   }
 
   return <>
@@ -75,7 +79,6 @@ function History({history, setHistorys}) {
             {state === "COMPLETED" && <></>}
             
         </Contents>
-       
     </HistoryBox>
   </>;
 }

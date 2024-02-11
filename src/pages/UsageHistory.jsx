@@ -78,21 +78,21 @@ export default function UsageHistory() {
       <Title>History</Title>
       
       <Container>
-        <Subtitle>예약 신청</Subtitle>
+        <Subtitle>Waiting for acceptance</Subtitle>
         <ReservationBox>
           {historys.map((history)=> history.state === "RESERVATING" &&
           <History history={history} setHistorys={setHistorys}/>)}
         </ReservationBox>
         <Hr />
 
-        <Subtitle>진행 중</Subtitle>
+        <Subtitle>In progress</Subtitle>
         <ProgressBox>
           {historys.map((history)=> history.state === "PROGRESSING" &&
           <History history={history} setHistorys={setHistorys}/>)}
           </ProgressBox>
         <Hr />
 
-        <Subtitle>거래 완료</Subtitle>
+        <Subtitle>Completion</Subtitle>
         <CompletionBox>
           {historys.map((history)=> history.state === "COMPLETED" &&
           <History history={history}/>)}
@@ -123,7 +123,7 @@ const Subtitle = styled.h2`
   margin: 10px 0 0 15px;
 `;
 const Container = styled.div`
-  margin: 20px 50px 0 50px;
+  margin: 20px 50px 50px 50px;
   background-color:#f3f3f3;
   border-radius: 30px;
   
