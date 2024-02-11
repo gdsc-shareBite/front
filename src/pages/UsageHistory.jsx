@@ -15,7 +15,7 @@ export default function UsageHistory() {
     {
       id:1,
       state: "RESERVATING",
-      title:"this is title",
+      title:"this is title hahah 길이확인용 길게길게 으어어ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ어어어어어어",
       imgSrc:"--",
       date:"02/11 10:09",
       name:"닉네임"

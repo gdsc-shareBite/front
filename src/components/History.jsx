@@ -46,6 +46,9 @@ function History({history, setHistorys}) {
         return "";
     }
   }
+  const handleTitleLength = () => {
+
+  }
 
   return <>
     <HistoryBox>
@@ -116,8 +119,12 @@ margin-left: 20px;
 `;
 
 const HistoryTitleLink = styled(Link)`
+  width: 40vw;
   font-size: 16px;
   margin-bottom: 10px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 `;
 const HistoryImg = styled.img`
   height: 80px;
