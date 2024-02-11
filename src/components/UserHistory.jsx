@@ -2,54 +2,65 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-/* Cancel 시 목록에서 삭제할지, 거래완료에 넣을지(-취소됨)*/
+/* dayjs 설정 */
+import dayjs from 'dayjs';
+import isLeapYear from 'dayjs/plugin/isLeapYear'; // 윤년 판단 플러그인
+import 'dayjs/locale/ko';
+
+dayjs.extend(isLeapYear);
+dayjs.locale('ko');
 
 export default function UserHistory({history, setHistorys}) {
-  const {id, state, title, imgSrc, date,} = history;
+  const {id, state, title, imgSrc, date, name} = history;
 
-  const makeNewHistory = (newState) => {
-    const newHistory = {
-      state:newState,
-      id,title,imgSrc,date
-    };
-    setHistorys((prev)=>{
-      return prev.map(
-        (oldHistory)=>
-        oldHistory.id === newHistory.id ? newHistory : oldHistory
-        )});
-  }
-  const removeHistory = () => {
-    setHistorys((prev)=>{
-      return prev.filter(history=>history.id !==id);
-    });
+  //취소시 history 삭제 함수
+  const handleRemoveHistory = () => {
+    //취소시 재확인
+    if (window.confirm("Are you sure you want to cancel it?")) {
+      setHistorys((prev)=>{
+        return prev.filter(history=>history.id !==id);
+      });
+      alert("Deleted.");
+    } else {
+      alert("It has been canceled.");
+    }
   }
 
-  const handleCancel = () =>{
-    makeNewHistory("COMPLETED");
-    
-  }
-  const handleDecline = () =>{
-    removeHistory();
+  const handleStateName = (state) => {
+    switch(state){
+      case "RESERVATING":
+        return "Reserved";
+      case "PROGRESSING":
+        return "Accepted";
+      case "COMPLETED":
+        return "Completed";
+      default:
+        return "";
+    }
   }
 
   return <>
     <HistoryBox>
         <HistoryImg src="" alt="-"/>
         <Contents>
-          <HistoryDate>{date}</HistoryDate>
-          <Link to={`/posts/`}>{title}</Link>
-          {state === "RESERVATING" &&
-            <BtnWrapper>
-              <CancelBtn onClick={() => handleCancel()}>Cancel</CancelBtn>
-            </BtnWrapper>}
-          {state === "PROGRESSING" &&
-            <BtnWrapper>
-              <CancelBtn onClick={() => handleCancel()}>Cancel</CancelBtn>
-            </BtnWrapper>}
-          {state === "COMPLETED" && <></>}
+          <DetailWrapper>
+            <HistoryDate>{date}</HistoryDate>
+            <HistoryState>{handleStateName(state)}</HistoryState>
+          </DetailWrapper>
+          <TitleWrapper>
+            <HistoryTitleLink to={`/posts/`}>{title}</HistoryTitleLink>
+          </TitleWrapper>
+            {state === "RESERVATING" &&
+              <BtnWrapper>
+                <CancelBtn onClick={handleRemoveHistory}>Cancel</CancelBtn>
+              </BtnWrapper>}
+            {state === "PROGRESSING" &&
+              <BtnWrapper>
+                <CancelBtn onClick={handleRemoveHistory}>Cancel</CancelBtn>
+              </BtnWrapper>}
+            {state === "COMPLETED" && <></>}
             
         </Contents>
-       
     </HistoryBox>
   </>;
 }
@@ -71,15 +82,30 @@ const Contents = styled.div`
   
   margin: 10px 20px;
 `;
+const DetailWrapper = styled.div`
+`;
 const HistoryDate = styled.span`
 font-size: 12px;
 color: #5d5d5d;
 margin-bottom: 8px;
 `;
-const HistoryTitle = styled(Link)`
+
+const HistoryState = styled(HistoryDate)`
+margin-left: 8px;
+`;
+
+const TitleWrapper = styled.div`
+display: flex;
+align-items: center;
+`;
+
+const HistoryTitleLink = styled(Link)`
+  width: 40vw;
   font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 `;
 const HistoryImg = styled.img`
   height: 80px;
@@ -104,12 +130,9 @@ const Btn = styled.button`
   transition: background-color 0.2s ease-in ;
   &:hover{
     background-color: #dedede;
-  }
-  
-`;
+  }`;
 
-const CancelBtn = styled(Btn)``;
-const DeclineBtn = styled(Btn)`
+const CancelBtn = styled(Btn)`
   color: white;
   background-color: #555657;
   border: 0px solid white;
@@ -117,4 +140,3 @@ const DeclineBtn = styled(Btn)`
     background-color: #777777;
   }
 `;
-

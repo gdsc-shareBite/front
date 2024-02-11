@@ -3,13 +3,7 @@ import {styled,} from "styled-components";
 import History from "../components/History";
 import axios from "axios";
 
-/* 
-1) state props에 따라 보여주는 버튼이 다름 <<
-2) 수락->진행 중 / 거절->history 삭제
-3) 확정->거래완료 / not visited->history 삭제
-*/
 export default function UsageHistory() {
-
   /* 예약신청: "RESERVATING"  진행중:"PROGRESSING" 완료:"COMPLETED "*/
   const data = [
     {
@@ -76,7 +70,6 @@ export default function UsageHistory() {
   return <>
     <Wrapper>
       <Title>History</Title>
-      
       <Container>
         <Subtitle>Waiting for acceptance</Subtitle>
         <ReservationBox>
@@ -84,22 +77,18 @@ export default function UsageHistory() {
           <History history={history} setHistorys={setHistorys}/>)}
         </ReservationBox>
         <Hr />
-
         <Subtitle>In progress</Subtitle>
         <ProgressBox>
           {historys.map((history)=> history.state === "PROGRESSING" &&
           <History history={history} setHistorys={setHistorys}/>)}
           </ProgressBox>
         <Hr />
-
         <Subtitle>Completion</Subtitle>
         <CompletionBox>
           {historys.map((history)=> history.state === "COMPLETED" &&
           <History history={history}/>)}
           </CompletionBox>
-        
       </Container>
-      
     </Wrapper>
   </>;
 }

@@ -3,13 +3,7 @@ import {styled,} from "styled-components";
 import UserHistory from "../components/UserHistory";
 import axios from "axios";
 
-/* 
-1) state props에 따라 보여주는 버튼이 다름 <<
-2) 수락->진행 중 / 거절->history 삭제
-3) 확정->거래완료 / not visited->history 삭제
-*/
 export default function UserUsageHistory() {
-
   /* 예약신청: "RESERVATING"  진행중:"PROGRESSING" 완료:"COMPLETED "*/
   const data = [
     {
@@ -17,31 +11,43 @@ export default function UserUsageHistory() {
       state: "RESERVATING",
       title:"this is title",
       imgSrc:"--",
-      date:"1/1",
+      date:"02/11 10:09",
+      name:"닉네임"
     },{
       id:2,
       state: "RESERVATING",
       title:"hi",
       imgSrc:"--",
-      date:"1/2",
+      date:"02/11 10:10",
+      name:"선정민",
+    },{
+      id:6,
+      state: "RESERVATING",
+      title:"커피",
+      imgSrc:"--",
+      date:"02/10 10:11",
+      name:"정소은",
     },{
       id:3,
       state: "PROGRESSING",
       title:"빵",
       imgSrc:"--",
-      date:"1/3",
+      date:"02/11 10:12",
+      name:"주성천",
     },{
       id:4,
       state: "COMPLETED",
       title:"케이크",
       imgSrc:"--",
-      date:"1/4",
+      date:"02/11 10:20",
+      name:"강조은",
     },{
       id:5,
       state: "COMPLETED",
       title:"도넛",
       imgSrc:"--",
-      date:"1/5",
+      date:"02/11 10:30",
+      name:"닉네임",
     },
   ];
 
@@ -64,30 +70,25 @@ export default function UserUsageHistory() {
   return <>
     <Wrapper>
       <Title>History</Title>
-      
       <Container>
-        <Subtitle>예약 대기 중</Subtitle>
+        <Subtitle>Waiting for acceptance</Subtitle>
         <ReservationBox>
           {historys.map((history)=> history.state === "RESERVATING" &&
           <UserHistory history={history} setHistorys={setHistorys}/>)}
         </ReservationBox>
         <Hr />
-
-        <Subtitle>진행 중</Subtitle>
+        <Subtitle>In progress</Subtitle>
         <ProgressBox>
           {historys.map((history)=> history.state === "PROGRESSING" &&
           <UserHistory history={history} setHistorys={setHistorys}/>)}
           </ProgressBox>
         <Hr />
-
-        <Subtitle>거래 완료</Subtitle>
+        <Subtitle>Completion</Subtitle>
         <CompletionBox>
           {historys.map((history)=> history.state === "COMPLETED" &&
           <UserHistory history={history}/>)}
           </CompletionBox>
-        
       </Container>
-      
     </Wrapper>
   </>;
 }
@@ -111,7 +112,7 @@ const Subtitle = styled.h2`
   margin: 10px 0 0 15px;
 `;
 const Container = styled.div`
-  margin: 20px 50px 0 50px;
+  margin: 20px 50px 50px 50px;
   background-color:#f3f3f3;
   border-radius: 30px;
   

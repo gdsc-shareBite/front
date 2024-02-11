@@ -10,7 +10,7 @@ import 'dayjs/locale/ko';
 dayjs.extend(isLeapYear);
 dayjs.locale('ko');
 
-function History({history, setHistorys}) {
+export default function History({history, setHistorys}) {
   const {id, state, title, imgSrc, date, name} = history;
   
   //history 진행 상태 변경 함수
@@ -38,7 +38,6 @@ function History({history, setHistorys}) {
     } else {
       alert("It has been canceled.");
     }
-    
   }
 
   const handleStateName = (state) => {
@@ -152,9 +151,7 @@ const Btn = styled.button`
   transition: background-color 0.2s ease-in ;
   &:hover{
     background-color: #dedede;
-  }
-  
-`;
+  }`;
 
 const AcceptBtn = styled(Btn)``;
 const DeclineBtn = styled(Btn)`
@@ -165,6 +162,3 @@ const DeclineBtn = styled(Btn)`
     background-color: #777777;
   }
 `;
-
-
-export default History;
