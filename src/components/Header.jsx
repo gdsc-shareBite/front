@@ -10,13 +10,13 @@ export default function Header() {
       </Link>
       <Nav>
         <Link to="/posts">Post</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/history">History</Link>
-        <Link to="/mypage" style={{ marginRight: "40px" }}>
+        <Link to="/">Register</Link>
+        <Link to="/">History</Link>
+        <Link to="/" style={{ marginRight: "40px" }}>
           MyPage
         </Link>
         <Button>LOGIN</Button>
-        <Button color="#35314c" text="white">
+        <Button color="#35314c" textColor="white">
           SIGN UP
         </Button>
       </Nav>
@@ -34,7 +34,7 @@ const HeaderBar = styled.header`
 
 const Nav = styled.nav`
   display: flex;
-  gap: 20px;
+  gap: 12px;
   align-items: center;
 `;
 
@@ -42,8 +42,9 @@ const Button = styled.button`
   border-radius: 10%;
   border: 0px;
   background-color: ${(props) => props.color || "#cdcdcd"};
-  color: ${(props) => props.text || "black"};
+  color: ${(props) => props.textColor || "black"};
   padding: 10px;
+  font-weight: bolder;
   cursor: pointer;
 `;
 

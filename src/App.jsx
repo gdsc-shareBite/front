@@ -2,12 +2,13 @@ import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Main from "./pages/Main";
-import Post from "./pages/Post";
-import Register from "./pages/Register";
+import UsageHistory from "./pages/UsageHistory";
 import NotFound from "./components/NotFound";
-import ProductDetail from "./pages/ProductDetail";
 import MyPage from "./pages/Mypage";
+import PostList from "./pages/PostList";
+import PostDetail from "./pages/PostDetail";
 import { createGlobalStyle } from "styled-components";
+import Register from "./pages/Register";
 
 const GlobalStyle = createGlobalStyle`
   /* Reset some basic elements */
@@ -55,12 +56,16 @@ const router = createBrowserRouter([
         element: <Main />,
       },
       {
+        path: "usage-history",
+        element: <UsageHistory />,
+      },
+      {
         path: "posts",
-        element: <Post />,
+        element: <PostList />,
       },
       {
         path: "posts/:id",
-        element: <ProductDetail />,
+        element: <PostDetail />,
       },
       {
         path: "mypage",
