@@ -77,7 +77,7 @@ export default function Register() {
                 onChange={(date) => setManufacturingDate(date)}
               />
             </DateWrapper>
-            <h2>인원수</h2>
+            <h2>Count</h2>
             <CounterWrapper>
               <Button onClick={handleDecrement}>-</Button>
               <CountDisplay>{count}</CountDisplay>
@@ -86,14 +86,14 @@ export default function Register() {
             <div>
               <h2>Tags</h2>
               {[
-                "청소/계란",
-                "유유/유제품",
-                "채소/과일",
-                "고기",
-                "반찬",
-                "베이커리",
-                "조리",
-                "비조리",
+                "Egg",
+                "Milk/dairy",
+                "Vegetables/fruits",
+                "Meat",
+                "Side dishes",
+                "Bakery",
+                "Cooked",
+                "UnCooked",
               ].map((tag) => (
                 <Tag
                   key={tag}
