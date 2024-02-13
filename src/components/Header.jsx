@@ -10,9 +10,9 @@ export default function Header() {
       </Link>
       <Nav>
         <Link to="/posts">Post</Link>
-        <Link to="/">Register</Link>
+        <Link to="/register">Register</Link>
         <Link to="/usage-history">History</Link>
-        <Link to="/" style={{ marginRight: "40px" }}>
+        <Link to="/mypage" style={{ marginRight: "40px" }}>
           MyPage
         </Link>
         <Button>LOGIN</Button>
