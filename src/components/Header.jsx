@@ -1,11 +1,15 @@
+import { color } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import mainTheme from "../theme";
+
+
 
 export default function Header() {
   return (
     <HeaderBar>
-      <Link to="/">
+      <Link to="/" style={{color:mainTheme.green}}>
         <Title>ShareBite</Title>
       </Link>
       <Nav>
@@ -49,6 +53,8 @@ const Button = styled.button`
 `;
 
 const Title = styled.h1`
+  font-family: 'EF_jejudoldam';
+  color: "#859F71";
   font-weight: bold;
   font-size: 30px;
 `;
