@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Main from "./pages/Main";
 import UsageHistory from "./pages/UsageHistory";
+import UserUsageHistory from "./pages/UserUsageHistory";
 import NotFound from "./components/NotFound";
 import MyPage from "./pages/Mypage";
 import PostList from "./pages/PostList";
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "usage-history",
         element: <UsageHistory />,
+      },
+      {
+        path: "user-usage-history",
+        element: <UserUsageHistory />,
       },
       {
         path: "posts",

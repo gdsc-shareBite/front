@@ -11,7 +11,7 @@ export default function Header() {
       <Nav>
         <Link to="/posts">Post</Link>
         <Link to="/register">Register</Link>
-        <Link to="/">History</Link>
+        <Link to="/usage-history">History</Link>
         <Link to="/mypage" style={{ marginRight: "40px" }}>
           MyPage
         </Link>
