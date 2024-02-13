@@ -6,54 +6,107 @@ export default function BecomeGiver() {
   const [storeName, setStoreName] = useState("");
   const [storeAddress, setStoreAddress] = useState("");
   const [storePhone, setStorePhone] = useState("");
+  const [isReviewing, setIsReviewing] = useState(false);
+  const [isReviewed, setIsReviewed] = useState(false);
+
+  // 심사중 !
+  const handleSaveClick = () => {
+    setIsReviewing(true);
+    setTimeout(() => {
+      setIsReviewing(false);
+      setIsReviewed(true);
+    }, 2000);
+  };
   return (
     <div>
       <MainLabel>Become a Giver!</MainLabel>
-      <InputWrapper>
-        <Input
-          label="Name of Store"
-          type="text"
-          onlyNumbers
-          value={storeName}
-          onChange={(e) => setStoreName(e.target.value)}
-          placeholder="Name of Store"
-        />
-        <Input
-          label="Store address"
-          type="text"
-          onlyNumbers
-          value={storeAddress}
-          onChange={(e) => setStoreAddress(e.target.value)}
-          placeholder="Store address"
-        />
-        <Input
-          label="Store phone number"
-          type="text"
-          onlyNumbers
-          value={storePhone}
-          onChange={(e) => setStorePhone(e.target.value)}
-          placeholder="Store phone number"
-        />
-      </InputWrapper>
-      <BtnWrapper>
-        <div style={{ gap: "10px", display: "flex" }}>
-          <SaveProfile>Save Changes</SaveProfile>
-          <CancelProfile>Cancel</CancelProfile>
+      {!isReviewed ? (
+        !isReviewing ? (
+          <>
+            <InputWrapper>
+              <Input
+                label="Name of Store"
+                type="text"
+                value={storeName}
+                onChange={(e) => setStoreName(e.target.value)}
+                placeholder="Name of Store"
+              />
+              <Input
+                label="Store address"
+                type="text"
+                value={storeAddress}
+                onChange={(e) => setStoreAddress(e.target.value)}
+                placeholder="Store address"
+              />
+              <Input
+                label="Store phone number"
+                type="text"
+                value={storePhone}
+                onChange={(e) => setStorePhone(e.target.value)}
+                placeholder="Store phone number"
+              />
+            </InputWrapper>
+            <BtnWrapper>
+              <div style={{ gap: "10px", display: "flex" }}>
+                <SaveProfile onClick={handleSaveClick}>
+                  Save Changes
+                </SaveProfile>
+                <CancelProfile>Cancel</CancelProfile>
+              </div>
+              <DeleteProfile>Delete Account</DeleteProfile>
+            </BtnWrapper>
+          </>
+        ) : (
+          <div>심사중...</div>
+        )
+      ) : (
+        <div>
+          심사가 완료
+          <InputWrapper>
+            <Input
+              label="Name of Store"
+              type="text"
+              value={storeName}
+              onChange={(e) => setStoreName(e.target.value)}
+              placeholder="Name of Store"
+            />
+            <Input
+              label="Store address"
+              type="text"
+              value={storeAddress}
+              onChange={(e) => setStoreAddress(e.target.value)}
+              placeholder="Store address"
+            />
+            <Input
+              label="Store phone number"
+              type="text"
+              value={storePhone}
+              onChange={(e) => setStorePhone(e.target.value)}
+              placeholder="Store phone number"
+            />
+          </InputWrapper>
+          <div>ing POST</div>
+          <BtnWrapper>
+            <div style={{ gap: "10px", display: "flex" }}>
+              <SaveProfile onClick={handleSaveClick}>Save Changes</SaveProfile>
+              <CancelProfile>Cancel</CancelProfile>
+            </div>
+            <DeleteProfile>Delete Account</DeleteProfile>
+          </BtnWrapper>
         </div>
-        <DeleteProfile>Delete Account</DeleteProfile>
-      </BtnWrapper>
+      )}
     </div>
   );
 }
 
 const MainLabel = styled.h1`
-  font-size: 30px;
+  font-size: 24px;
 `;
 
 const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 20px;
   gap: 20px;
 `;
 
@@ -62,6 +115,7 @@ const BtnWrapper = styled.div`
   justify-content: space-between;
   margin-top: 30px;
   width: 100%;
+  gap: 5px;
 `;
 const SaveProfile = styled.button`
   border-radius: 40px;

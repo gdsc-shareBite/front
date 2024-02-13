@@ -8,7 +8,7 @@ const Div = styled.div`
 
 const StyledInput = styled.input`
   width: 100%;
-  height: 20px;
+  height: 30px;
   border: 1px solid #b2b2b2;
   border-radius: 8px;
 `;
