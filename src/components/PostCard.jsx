@@ -44,7 +44,12 @@ const Wrapper = styled.div`
   border-radius: 15px;
   width: 478px;
   margin-bottom: 30px;
+  transition: all 0.3 ease;
   cursor: pointer;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
 `;
 
 const Title = styled.h3`
