@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {styled,} from "styled-components";
-import History from "../components/History";
+import UserHistory from "../components/UserHistory";
 import axios from "axios";
 
-export default function UsageHistory() {
+export default function UserUsageHistory() {
   /* 예약신청: "RESERVATING"  진행중:"PROGRESSING" 완료:"COMPLETED "*/
   const data = [
     {
       id:1,
       state: "RESERVATING",
-      title:"this is title hahah 길이확인용 길게길게 으어어ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ어어어어어어",
+      title:"this is title",
       imgSrc:"--",
       date:"02/11 10:09",
       name:"닉네임"
@@ -74,19 +74,19 @@ export default function UsageHistory() {
         <Subtitle>Waiting for acceptance</Subtitle>
         <ReservationBox>
           {historys.map((history)=> history.state === "RESERVATING" &&
-          <History history={history} setHistorys={setHistorys}/>)}
+          <UserHistory history={history} setHistorys={setHistorys}/>)}
         </ReservationBox>
         <Hr />
         <Subtitle>In progress</Subtitle>
         <ProgressBox>
           {historys.map((history)=> history.state === "PROGRESSING" &&
-          <History history={history} setHistorys={setHistorys}/>)}
+          <UserHistory history={history} setHistorys={setHistorys}/>)}
           </ProgressBox>
         <Hr />
         <Subtitle>Completion</Subtitle>
         <CompletionBox>
           {historys.map((history)=> history.state === "COMPLETED" &&
-          <History history={history}/>)}
+          <UserHistory history={history}/>)}
           </CompletionBox>
       </Container>
     </Wrapper>

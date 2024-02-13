@@ -33,13 +33,12 @@ export default function MyPage() {
     <div>
       <MainLabel>Profile</MainLabel>
       <ImgContainer>
-        {/* 수정된 컴포넌트 이름 사용 */}
         <input
           type="file"
           accept="image/*"
           style={{ display: "none" }}
           onChange={handleFileChange}
-          ref={fileInputRef} // ref 객체 직접 할당
+          ref={fileInputRef}
         />
         <img
           src={imgSrc || "https://picpac.kr/common/img/default_profile.png"}
@@ -104,20 +103,20 @@ const ImgContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 32px 0 20px 0;
+  margin: 10px 0 10px 0;
   position: relative;
   gap: 30px;
 
   > img {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 60px;
     border: 2.805px solid #eaeaea;
     filter: brightness(60%);
   }
 `;
 const MainLabel = styled.h1`
-  font-size: 30px;
+  font-size: 24px;
 `;
 
 const ProfileImgEditBtn = styled.button`
@@ -145,15 +144,16 @@ const ProfileImgDelete = styled.div`
 const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 15px;
   gap: 20px;
 `;
 
 const BtnWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+  margin: 30px 0;
   width: 100%;
+  gap: 5px;
 `;
 const SaveProfile = styled.button`
   border-radius: 40px;

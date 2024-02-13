@@ -10,22 +10,8 @@ import 'dayjs/locale/ko';
 dayjs.extend(isLeapYear);
 dayjs.locale('ko');
 
-export default function History({history, setHistorys}) {
+export default function UserHistory({history, setHistorys}) {
   const {id, state, title, imgSrc, date, name} = history;
-  
-  //history 진행 상태 변경 함수
-  const handleChangeState = (newState) => {
-    const newHistory = {
-      state:newState,
-      date:dayjs(new Date()).format('MM/DD hh:mm:ss'),
-      id,title,imgSrc,name,
-    };
-    setHistorys((prev)=>{
-      return prev.map(
-        (oldHistory)=>
-        oldHistory.id === newHistory.id ? newHistory : oldHistory
-        )});
-  }
 
   //취소시 history 삭제 함수
   const handleRemoveHistory = () => {
@@ -63,17 +49,14 @@ export default function History({history, setHistorys}) {
           </DetailWrapper>
           <TitleWrapper>
             <HistoryTitleLink to={`/posts/`}>{title}</HistoryTitleLink>
-            <UserName>{"- "+name}</UserName>
           </TitleWrapper>
             {state === "RESERVATING" &&
               <BtnWrapper>
-                <AcceptBtn onClick={() => handleChangeState("PROGRESSING")}>Accept</AcceptBtn>
-                <DeclineBtn onClick={handleRemoveHistory}>Decline</DeclineBtn>
+                <CancelBtn onClick={handleRemoveHistory}>Cancel</CancelBtn>
               </BtnWrapper>}
             {state === "PROGRESSING" &&
               <BtnWrapper>
-                <AcceptBtn onClick={() => handleChangeState("COMPLETED")}>Confirm</AcceptBtn>
-                <DeclineBtn onClick={handleRemoveHistory}>Not Visited</DeclineBtn>
+                <CancelBtn onClick={handleRemoveHistory}>Cancel</CancelBtn>
               </BtnWrapper>}
             {state === "COMPLETED" && <></>}
             
@@ -116,10 +99,6 @@ display: flex;
 align-items: center;
 `;
 
-const UserName = styled(HistoryDate)`
-margin-left: 20px;
-`;
-
 const HistoryTitleLink = styled(Link)`
   width: 40vw;
   font-size: 16px;
@@ -153,8 +132,7 @@ const Btn = styled.button`
     background-color: #dedede;
   }`;
 
-const AcceptBtn = styled(Btn)``;
-const DeclineBtn = styled(Btn)`
+const CancelBtn = styled(Btn)`
   color: white;
   background-color: #555657;
   border: 0px solid white;
