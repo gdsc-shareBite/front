@@ -2,7 +2,7 @@ import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import mainTheme from "./theme";
+import theme from "./theme";
 
 /*  pages  */
 import Main from "./pages/Main";
@@ -98,9 +98,10 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <>
-      <GlobalStyle />
-      <ThemeProvider theme={mainTheme} />
-      <RouterProvider router={router} />
+     <ThemeProvider theme={theme} >
+        <GlobalStyle />
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </>
   );
 }

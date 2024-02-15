@@ -9,7 +9,7 @@ import mainTheme from "../theme";
 export default function Header() {
   return (
     <HeaderBar>
-      <Link to="/" style={{color:mainTheme.green}}>
+      <Link to="/" style={{color:"#859F71"}}>
         <Title>ShareBite</Title>
       </Link>
       <Nav>
@@ -20,7 +20,7 @@ export default function Header() {
           MyPage
         </Link>
         <Button>LOGIN</Button>
-        <Button color="#35314c" textColor="white">
+        <Button color="#859F71" textColor="white">
           SIGN UP
         </Button>
       </Nav>
