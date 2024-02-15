@@ -119,24 +119,26 @@ const BtnWrapper = styled.div`
 width: 300px;
 `;
 const Btn = styled.button`
+  color: ${(props)=>props.theme.lightGray};
   width: 100px;
   height: 30px;
   margin: 0 10px 0 0;
   font-weight: 400;
-  background-color: #f0f0f0;
+  background-color: ${(props)=>props.theme.green};
   border: 0px solid white;
   border-radius: 10px;
   box-shadow: 1px 2px 3px 2px #ebebeb;
   transition: background-color 0.2s ease-in ;
   &:hover{
-    background-color: #dedede;
-  }`;
-
+    background-color: ${(props)=>props.theme.darkGreen};
+  }
+  `;
+  
 const CancelBtn = styled(Btn)`
-  color: white;
-  background-color: #555657;
+  color: ${(props)=>props.theme.darkGray};
+  background-color: #f0f0f0;
   border: 0px solid white;
   &:hover{
-    background-color: #777777;
+    background-color: #dedede;
   }
 `;

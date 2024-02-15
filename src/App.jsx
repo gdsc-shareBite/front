@@ -1,15 +1,20 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+import theme from "./theme";
+
+/*  pages  */
 import Main from "./pages/Main";
 import UsageHistory from "./pages/UsageHistory";
 import UserUsageHistory from "./pages/UserUsageHistory";
-import NotFound from "./components/NotFound";
 import MyPage from "./pages/Mypage";
 import PostList from "./pages/PostList";
 import PostDetail from "./pages/PostDetail";
-import { createGlobalStyle } from "styled-components";
 import Register from "./pages/Register";
+
+/*  componenets  */
+import NotFound from "./components/NotFound";
 
 const GlobalStyle = createGlobalStyle`
   /* Reset some basic elements */
@@ -44,6 +49,12 @@ const GlobalStyle = createGlobalStyle`
     color : black;
     cursor: pointer;
   }
+  @font-face {
+    font-family: 'EF_jejudoldam';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 `;
 
 const router = createBrowserRouter([
@@ -87,8 +98,10 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <>
-      <GlobalStyle />
-      <RouterProvider router={router} />
+     <ThemeProvider theme={theme} >
+        <GlobalStyle />
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </>
   );
 }

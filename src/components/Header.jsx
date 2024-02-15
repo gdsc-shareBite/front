@@ -1,11 +1,15 @@
+import { color } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import mainTheme from "../theme";
+
+
 
 export default function Header() {
   return (
     <HeaderBar>
-      <Link to="/">
+      <Link to="/" style={{color:"#859F71"}}>
         <Title>ShareBite</Title>
       </Link>
       <Nav>
@@ -16,7 +20,7 @@ export default function Header() {
           MyPage
         </Link>
         <Button>LOGIN</Button>
-        <Button color="#35314c" textColor="white">
+        <Button color="#859F71" textColor="white">
           SIGN UP
         </Button>
       </Nav>
@@ -49,6 +53,8 @@ const Button = styled.button`
 `;
 
 const Title = styled.h1`
+  font-family: 'EF_jejudoldam';
+  color: "#859F71";
   font-weight: bold;
   font-size: 30px;
 `;
