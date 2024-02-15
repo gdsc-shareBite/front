@@ -3,12 +3,16 @@ import React, {
   useRef,
   useImperativeHandle,
   useState,
+  useEffect,
 } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 
-const FilterModal = forwardRef(function FilterModal({ setFilters }, ref) {
-  const [selectedTags, setSelectedTags] = useState({});
+const FilterModal = forwardRef(function FilterModal(
+  { initialValues, setInitialValues },
+  ref
+) {
+  const [selectedTags, setSelectedTags] = useState({ initialValues });
   const dialog = useRef();
 
   // 태그 클릭 핸들러
@@ -24,7 +28,10 @@ const FilterModal = forwardRef(function FilterModal({ setFilters }, ref) {
       open() {
         dialog.current.showModal();
       },
-      close() {},
+      close() {
+        dialog.current.close();
+        setInitialValues(selectedTags);
+      },
     };
   });
 
@@ -52,7 +59,7 @@ const FilterModal = forwardRef(function FilterModal({ setFilters }, ref) {
         ))}
       </TagContainer>
       <form method="dialog">
-        <Button>Close</Button>
+        <Button onClick={() => ref.current.close()}>Close</Button>
       </form>
     </ModalContainer>,
     document.getElementById("modal")

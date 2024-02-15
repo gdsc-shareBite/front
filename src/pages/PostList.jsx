@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import PostCard from "../components/PostCard";
 import Map from "../components/Map";
@@ -7,14 +7,8 @@ import { useFetch } from "../hooks/useFetch";
 import FilterModal from "../components/Modal/FilterModal";
 
 export default function PostList() {
-  const [values, setValues] = useState("");
-  // const [
-  //   isFetching,
-  //   error,
-  //   fetchedData: availableFoods,
-  //   setFetchedDat: setAvailableFoods,
-  // ] = useFetch(fetchAvailableFoods, []);
-
+  const [filterValues, setFilterValues] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const dialog = useRef();
 
   function openFilterModal() {
@@ -23,7 +17,11 @@ export default function PostList() {
 
   return (
     <>
-      <FilterModal ref={dialog} />
+      <FilterModal
+        ref={dialog}
+        initialValues={filterValues}
+        setInitialValues={setFilterValues}
+      />
       <Div>
         <Map />
         <List>
@@ -32,11 +30,12 @@ export default function PostList() {
               event.preventDefault();
             }}
           >
-            <Input placeholder="검색어 입력" value={values.search} />
+            <Input placeholder="검색어 입력" value={filterValues.search} />
             <Button onClick={openFilterModal}>
               <IoOptions size="30" style={{ marginBottom: "3px" }} />
             </Button>
           </Form>
+          {/* filter, includes 이용해서 PostCard 출력하기 */}
           <PostCard product={{ id: 1 }} />
           <PostCard product={{ id: 2 }} />
           <PostCard product={{ id: 3 }} />
