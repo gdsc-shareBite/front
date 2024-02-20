@@ -1,12 +1,19 @@
 import { color } from "framer-motion";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import mainTheme from "../theme";
+import Login from "./Modal/Login";
 
 
 
 export default function Header() {
+  
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onClickButton = () => {
+    setIsOpen(true);
+  };
+
   return (
     <HeaderBar>
       <Link to="/" style={{color:"#859F71"}}>
@@ -19,7 +26,13 @@ export default function Header() {
         <Link to="/mypage" style={{ marginRight: "40px" }}>
           MyPage
         </Link>
-        <Button>LOGIN</Button>
+        <Button onClick={onClickButton}>LOGIN</Button>
+      {isOpen && (<Login
+        open={isOpen}
+        onClose={() => {
+          setIsOpen(false);
+        }}
+      />)}
         <Button color="#859F71" textColor="white">
           SIGN UP
         </Button>
