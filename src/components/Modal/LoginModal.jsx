@@ -6,7 +6,7 @@ const LoginModal = forwardRef(function LoginModal({ props }, ref) {
 
   return createProtal(
     <ModalContainer>
-      <p>Login</p>
+      
     </ModalContainer>,
     document.getElementById("modal")
   );
