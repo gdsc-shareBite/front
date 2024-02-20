@@ -21,14 +21,14 @@ export default function Login({ onClose }) {
     <Overlay>
       <ModalWrap onClose={handleClose}>
         <Title>{isLogin ? 'Login' : 'Sign Up'}</Title>
-        <form onSubmit={handleSubmit}>
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          {!isLogin && <input type="password" placeholder="Confirm Password" required />}
-          <button type="submit">{isLogin ? 'Login' : 'Sign Up'}</button>
-        </form>
+        <CloseButton onClick={handleClose}><i class="fa-solid fa-xmark"></i></CloseButton>
+        <Form onSubmit={handleSubmit}>
+          <Input type="email" placeholder="Email" required />
+          <Input type="password" placeholder="Password" required />
+          {!isLogin && <Input type="password" placeholder="Confirm Password" required />}
+          <Button onClick={handleClose} type="submit">{isLogin ? 'Login' : 'Sign Up'}</Button>
+        </Form>
         <p onClick={toggleForm}>{isLogin ? 'Don\'t have an account? Sign Up' : 'Already have an account? Login'}</p>
-        <CloseButton onClick={handleClose}>Close</CloseButton>
       </ModalWrap>
     </Overlay>
   );
@@ -47,46 +47,72 @@ const Overlay = styled.div`
 `;
 
 const ModalWrap = styled.div`
-  width: 600px;
-  height: 500px;
-  border-radius: 15px;
+  width: 700px;
+  height: 550px;
+  border-radius: 30px;
   background-color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
 `;
 
-const Title = styled.h2`
-  font-size: 24px;
-`;
 const CloseButton = styled.div`
-  float: right;
   width: 40px;
   height: 40px;
   margin: 20px;
   cursor: pointer;
-  i {
-    color: #5d5d5d;
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  i{
     font-size: 30px;
+    color: #6c6c6c;
+  }
+`;
+const Title = styled.h2`
+  font-size: 40px;
+  font-weight: 600;
+`;
+const Form = styled.form`
+  background-color: #ffffff;
+  width: 500px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+`;
+const Input = styled.input`
+  width: 400px;
+  height: 50px;
+  border: 2px solid #e6e6e6;
+  border-radius: 10px;
+  margin: 10px;
+  font-size: 18px;
+  &::placeholder{
+    color: #7d7d7d;
   }
 `;
 
+
 const Button = styled.button`
+  width: 400px;
+  height: 50px;
   font-size: 14px;
   padding: 10px 20px;
+  margin-top: 10px;
   border: none;
-  background-color: #ababab;
+  background-color: ${(props)=>props.theme.green};
   border-radius: 10px;
   color: white;
-  font-style: italic;
   font-weight: 200;
   cursor: pointer;
   &:hover {
-    background-color: #898989;
+    background-color: #6f8460;
   }
 `;
