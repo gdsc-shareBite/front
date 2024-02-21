@@ -4,13 +4,17 @@ import CoffeeThmbnail from "../assets/images/post/coffee1.jpg"
 import CurryThmbnail from "../assets/images/post/curry1.jpg"
 import SteakThmbnail from "../assets/images/post/steak1.jpg"
 
+import Curry1 from "../assets/images/post/curry1.jpg";
+import Curry2 from "../assets/images/post/curry2.jpg";
+import Curry3 from "../assets/images/post/curry3.jpg";
+
 export const PostContext = createContext();
 
 const data = [
   {
     id : 1,
     thumbnail : CurryThmbnail,
-    photos : [],
+    photos : [Curry1, Curry2, Curry3],
     rating : 4.5,
     name :  "Curry Restaurant", 
     location : "서울시 강동구",

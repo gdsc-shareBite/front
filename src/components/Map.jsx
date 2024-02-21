@@ -1,22 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import React, { useEffect, useState, useContext } from "react";
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import styled from "styled-components";
 import { ScaleLoader } from "react-spinners";
+import { PostContext } from "../store/PostContext";
 
 export default function Map() {
   const [location, setLocation] = useState();
   const [isLocationLoaded, setIsLocationLoaded] = useState(false);
+  const { data: posts } = useContext(PostContext);
 
   const containerStyle = {
-    width: "710px",
-    height: "858px",
+    width: "610px",
+    height: "758px",
     borderRadius: "20px",
+  };
+
+  const myLocationIcon = {
+    url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png', // 사용자 지정 아이콘 이미지 경로
+    scaledSize: new window.google.maps.Size(30, 30), // 아이콘 크기 설정
+    origin: new window.google.maps.Point(0, 0),
+    anchor: new window.google.maps.Point(15, 15) // 아이콘의 앵커 포인트 설정
   };
 
   useEffect(() => {
     async function fetchLocation() {
       const { geolocation } = navigator;
-
+      
       // geolocation.getCurrentPosition을 프로미스로 감싸는 부분
       const position = await new Promise((resolve, reject) => {
         geolocation.getCurrentPosition(resolve, reject);
@@ -33,7 +42,7 @@ export default function Map() {
   }, []);
 
   const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
-  console.log(apiKey)
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: apiKey,
@@ -41,7 +50,16 @@ export default function Map() {
 
   return isLoaded && isLocationLoaded && location ? (
     <GoogleMap mapContainerStyle={containerStyle} center={location} zoom={15}>
-      <></>
+      {posts.map(post => (
+        <Marker
+          key={post.id}
+          position={{ lat: post.coordinate[0], lng: post.coordinate[1] }}
+        />
+      ))}
+           <Marker
+        position={location}
+        icon={myLocationIcon}
+      />
     </GoogleMap>
   ) : (
     <Loading>

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function PostCard({
   product,
-  product: { id, thumbnail, rating, name, location, author, description },
+  product: { id, thumbnail, rating, name, location, author, description, photos },
 }) {
   const naviagte = useNavigate();
 

@@ -6,20 +6,6 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import styled from "styled-components";
 import ReservationModal from "../components/Modal/ReservationModal";
 
-const images = [
-  {
-    original: "https://picsum.photos/id/1018/1000/600/",
-    thumbnail: "https://picsum.photos/id/1018/250/150/",
-  },
-  {
-    original: "https://picsum.photos/id/1015/1000/600/",
-    thumbnail: "https://picsum.photos/id/1015/250/150/",
-  },
-  {
-    original: "https://picsum.photos/id/1019/1000/600/",
-    thumbnail: "https://picsum.photos/id/1019/250/150/",
-  },
-];
 
 export default function PostDetail() {
   const [isReserved, setIsReserved] = useState(false);
@@ -33,7 +19,21 @@ export default function PostDetail() {
     dialog.current.open();
   }
 
-  console.log(isReserved)
+  const images = [
+    {
+      original: post.photos[0],
+      thumbnail: post.photos[0],
+    },
+    {
+      original: post.photos[1],
+      thumbnail: post.photos[1],
+    },
+    {
+      original: post.photos[2],
+      thumbnail: post.photos[2],
+    },
+  ];
+
   return (
     <>
       {post ? (
