@@ -33,6 +33,7 @@ export default function Map() {
   }, []);
 
   const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
+  console.log(apiKey)
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: apiKey,

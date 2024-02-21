@@ -18,7 +18,8 @@ const data = [
     author : "Hose",
     title : "Curry Restaurant",
     description : "맛있는 카레입니다.",
-    tags : ["고기", "조리"] // 태그 추가
+    tags : ["고기", "조리"],
+    createdAt : "2023-12-04"
   },  
   {
     id : 2,
@@ -31,7 +32,8 @@ const data = [
     author : "Jamse",
     title : "Steak House",
     description : "미디엄 레어 스테이크 3인분 뿌려요.",
-    tags : ["고기", "조리"]
+    tags : ["고기", "조리"],
+    createdAt : "2023-12-04"
   },
   {
     id : 3,
@@ -44,7 +46,8 @@ const data = [
     author : "Mike",
     title : "Coffee Shop",
     description : "시원한 아이스 아메리카노와 크로와상 빵이 있습니다.",
-    tags : ["유제품","베이커리"] // 태그 추가
+    tags : ["유제품","베이커리"],
+    createdAt : "2023-12-04"
   }
 ]
 export function PostProvider({children}) {

@@ -8,10 +8,10 @@ const ReservationModal = forwardRef(function ReservationModal({ setIsReserved },
 
   useImperativeHandle(ref, () => ({
     open() {
+      setIsReserved(true);
       dialog.current.showModal();
     },
     close() {
-      setIsReserved(true);
       dialog.current.close();
     },
   }));
