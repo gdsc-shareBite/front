@@ -6,6 +6,64 @@ import { IoOptions } from "react-icons/io5";
 import { useFetch } from "../hooks/useFetch";
 import FilterModal from "../components/Modal/FilterModal";
 
+import CoffeeThmbnail from "../assets/images/post/coffee1.jpg"
+import CurryThmbnail from "../assets/images/post/curry1.jpg"
+import SteakThmbnail from "../assets/images/post/steak1.jpg"
+
+const coffeePaths = [
+  "../assets/images/post/coffee1.jpg",
+  "../assets/images/post/coffee2.jpg",
+  "../assets/images/post/coffee3.jpg",
+]
+const curryPaths = [
+  "../assets/images/post/curry1.jpg",
+  "../assets/images/post/curry2.jpg",
+  "../assets/images/post/curry3.jpg",
+]
+const steakPaths = [
+  "../assets/images/post/steak1.jpg",
+  "../assets/images/post/steak2.jpg",
+  "../assets/images/post/steak3.jpg",
+]
+const data = [
+  {
+    id : 1,
+    thumbnail : CurryThmbnail,
+    photos : curryPaths.map((path) => require(`${path}`)),
+    rating : 4.5,
+    name :  "Curry Restaurant", 
+    location : "서울시 강동구",
+    coordinate : [37.560171, 127.164144],
+    author : "Hose",
+    title : "Curry Restaurant",
+    description : "템 뿌려요."
+  },  
+  {
+    id : 2,
+    thumbnail : SteakThmbnail,
+    photos : [],
+    rating : 3.5,
+    name :  "Steak House",
+    location : "서울시 강동구",
+    coordinate : [37.558318, 127.159590],
+    author : "Jamse",
+    title : "Steak House",
+    description : "템 뿌려요."
+  },
+  {
+    id : 3,
+    thumbnail : CoffeeThmbnail,
+    photos : [],
+    rating : 4.2,
+    name :  "Coffee Shop",
+    location : "서울시 강동구",
+    coordinate : [37.557346, 127.164798],
+    author : "Mike",
+    title : "Coffee Shop",
+    description : "템 뿌려요."
+  }
+]
+
 export default function PostList() {
   const [filterValues, setFilterValues] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,9 +94,11 @@ export default function PostList() {
             </Button>
           </Form>
           {/* filter, includes 이용해서 PostCard 출력하기 */}
-          <PostCard product={{ id: 1 }} />
-          <PostCard product={{ id: 2 }} />
-          <PostCard product={{ id: 3 }} />
+          {
+            data.map((item) => (
+              <PostCard key={item.id} product={item} />
+            ))
+          }
         </List>
       </Div>
     </>

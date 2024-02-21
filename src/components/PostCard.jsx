@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function PostCard({
   product,
-  product: { id, thumbnail, photos, rating, name, location, author },
+  product: { id, thumbnail, rating, name, location, author },
 }) {
   const naviagte = useNavigate();
 
@@ -17,7 +17,7 @@ export default function PostCard({
       }}
     >
       <ImageWrapper>
-        <Image src={TestImage} alt="restaurantName" />
+        <Image src={thumbnail} alt="restaurantName" />
       </ImageWrapper>
       <InfoWrapper>
         <Title>{name || "식당이름입니다"}</Title>
