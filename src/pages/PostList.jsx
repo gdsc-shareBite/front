@@ -1,77 +1,62 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import PostCard from "../components/PostCard";
 import Map from "../components/Map";
 import { IoOptions } from "react-icons/io5";
 import { useFetch } from "../hooks/useFetch";
 import FilterModal from "../components/Modal/FilterModal";
-
-import CoffeeThmbnail from "../assets/images/post/coffee1.jpg"
-import CurryThmbnail from "../assets/images/post/curry1.jpg"
-import SteakThmbnail from "../assets/images/post/steak1.jpg"
-
-const coffeePaths = [
-  "../assets/images/post/coffee1.jpg",
-  "../assets/images/post/coffee2.jpg",
-  "../assets/images/post/coffee3.jpg",
-]
-const curryPaths = [
-  "../assets/images/post/curry1.jpg",
-  "../assets/images/post/curry2.jpg",
-  "../assets/images/post/curry3.jpg",
-]
-const steakPaths = [
-  "../assets/images/post/steak1.jpg",
-  "../assets/images/post/steak2.jpg",
-  "../assets/images/post/steak3.jpg",
-]
-const data = [
-  {
-    id : 1,
-    thumbnail : CurryThmbnail,
-    photos : curryPaths.map((path) => require(`${path}`)),
-    rating : 4.5,
-    name :  "Curry Restaurant", 
-    location : "서울시 강동구",
-    coordinate : [37.560171, 127.164144],
-    author : "Hose",
-    title : "Curry Restaurant",
-    description : "템 뿌려요."
-  },  
-  {
-    id : 2,
-    thumbnail : SteakThmbnail,
-    photos : [],
-    rating : 3.5,
-    name :  "Steak House",
-    location : "서울시 강동구",
-    coordinate : [37.558318, 127.159590],
-    author : "Jamse",
-    title : "Steak House",
-    description : "템 뿌려요."
-  },
-  {
-    id : 3,
-    thumbnail : CoffeeThmbnail,
-    photos : [],
-    rating : 4.2,
-    name :  "Coffee Shop",
-    location : "서울시 강동구",
-    coordinate : [37.557346, 127.164798],
-    author : "Mike",
-    title : "Coffee Shop",
-    description : "템 뿌려요."
-  }
-]
+import { PostContext } from "../store/PostContext";
 
 export default function PostList() {
-  const [filterValues, setFilterValues] = useState([]);
+  const { data: posts } = useContext(PostContext); // 'posts' 변수에 'data' 할당
+  const [filterValues, setFilterValues] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const dialog = useRef();
 
   function openFilterModal() {
     dialog.current.open();
   }
+
+  const matchesSearchTerm = (post) => {
+    return searchTerm === '' ||
+      post.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.description?.toLowerCase().includes(searchTerm.toLowerCase());
+  }
+  
+
+  const matchesSelectedTags = (post) => {
+    const selectedTags = Object.keys(filterValues).filter(tag => filterValues[tag]);
+  
+    if(selectedTags.length === 0) {
+      return true;
+    }
+  
+    const postTagsLower = post.tags.map(tag => tag.toLowerCase());
+    // const result = selectedTags.every(selectedTag => 
+    //   postTagsLower.includes(selectedTag.toLowerCase())
+    // );
+
+    for(let i = 0; i < selectedTags.length; i++) {
+      if(!post.tags.includes(selectedTags[i])){
+        console.log(`선택된 태그: ${selectedTags[i]}`);
+        console.log(post.tags)
+        console.log(`${post.id}`)
+        return false;
+      }
+    }
+  
+  
+    // 디버깅을 위해 선택된 태그와 게시글 태그를 출력
+    console.log(`선택된 태그: ${selectedTags}`);
+    console.log(`${post.id} 게시글 태그: ${postTagsLower}`);
+    // console.log(`${post.id}의 결과 : ` + result);
+  
+    return true;
+  }
+  
+
+  // 필터링 된 포스트 계산
+  const filteredPosts = posts.filter(post => matchesSearchTerm(post) && matchesSelectedTags(post));
 
   return (
     <>
@@ -88,15 +73,18 @@ export default function PostList() {
               event.preventDefault();
             }}
           >
-            <Input placeholder="검색어 입력" value={filterValues.search} />
+            <Input
+              placeholder="검색어 입력"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)} // 검색어 업데이트
+            />
             <Button onClick={openFilterModal}>
               <IoOptions size="30" style={{ marginBottom: "3px" }} />
             </Button>
           </Form>
-          {/* filter, includes 이용해서 PostCard 출력하기 */}
           {
-            data.map((item) => (
-              <PostCard key={item.id} product={item} />
+            filteredPosts.map((post) => ( // 필터링 된 포스트 사용
+              <PostCard key={post.id} product={post} />
             ))
           }
         </List>

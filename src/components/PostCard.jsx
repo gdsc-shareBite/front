@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function PostCard({
   product,
-  product: { id, thumbnail, rating, name, location, author },
+  product: { id, thumbnail, rating, name, location, author, description },
 }) {
   const naviagte = useNavigate();
 
@@ -26,7 +26,7 @@ export default function PostCard({
           <Rating>{rating || "4.8"}</Rating>
           <Author>{author || "James"}</Author>
         </RatingAndAuthor>
-        <Detail>장사 접습니다. 템 뿌려요.</Detail>
+        <Detail>{description}</Detail>
         <LocationWrapper>
           <FaMapMarkerAlt color="#2b90d9" />
           <Location>{location || "식당위치입니다."}</Location>

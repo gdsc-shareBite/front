@@ -10,6 +10,7 @@ import PostList from "./pages/PostList";
 import PostDetail from "./pages/PostDetail";
 import { createGlobalStyle } from "styled-components";
 import Register from "./pages/Register";
+import { PostProvider } from "./store/PostContext";
 
 const GlobalStyle = createGlobalStyle`
   /* Reset some basic elements */
@@ -86,9 +87,9 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <>
+    <PostProvider>
       <GlobalStyle />
       <RouterProvider router={router} />
-    </>
+    </PostProvider>
   );
 }

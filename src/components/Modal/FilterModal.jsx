@@ -12,10 +12,9 @@ const FilterModal = forwardRef(function FilterModal(
   { initialValues, setInitialValues },
   ref
 ) {
-  const [selectedTags, setSelectedTags] = useState({ initialValues });
+  const [selectedTags, setSelectedTags] = useState(initialValues);
   const dialog = useRef();
 
-  // 태그 클릭 핸들러
   const handleTagClick = (tagName) => {
     setSelectedTags((prevTags) => ({
       ...prevTags,
@@ -23,26 +22,24 @@ const FilterModal = forwardRef(function FilterModal(
     }));
   };
 
-  useImperativeHandle(ref, () => {
-    return {
-      open() {
-        dialog.current.showModal();
-      },
-      close() {
-        dialog.current.close();
-        setInitialValues(selectedTags);
-      },
-    };
-  });
+  useImperativeHandle(ref, () => ({
+    open() {
+      dialog.current.showModal();
+    },
+    close() {
+      dialog.current.close();
+      setInitialValues(selectedTags); // 여기에서 selectedTags 상태를 initialValues로 업데이트
+    },
+  }));
 
   return createPortal(
     <ModalContainer ref={dialog}>
       <p>여기서 검색할 게시글의 필터를 선택해주세요.</p>
       <TagContainer>
         {[
-          "청소/계란",
-          "유유/유제품",
-          "채소/과일",
+          "계란",
+          "유제품",
+          "과일",
           "고기",
           "반찬",
           "베이커리",
@@ -67,6 +64,7 @@ const FilterModal = forwardRef(function FilterModal(
 });
 
 export default FilterModal;
+
 
 const ModalContainer = styled.dialog`
   border: none;
