@@ -4,13 +4,17 @@ import trashIcon from "../assets/trashIcon.svg";
 import Input from "../components/Input";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { color } from "framer-motion";
 
 export default function MyPage() {
   const [imgSrc, setImgSrc] = useState("");
-  const [name, setName] = useState("");
-  const [country, setCountry] = useState("");
-  const [address, setAddress] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
+  const [isEditing, setIsEditing] = useState(false);
+  const [profile, setProfile] = useState({
+    name: "",
+    country: "",
+    address: "",
+    birthDate: new Date(),
+  });
   const fileInputRef = useRef(null);
 
   const handleFileChange = (e) => {
@@ -27,6 +31,20 @@ export default function MyPage() {
 
   const handleImgClick = () => {
     fileInputRef.current?.click();
+  };
+
+  const handleEdit = () => setIsEditing(true);
+  const handleCancel = () => setIsEditing(false);
+  const handleSaveChanges = () => {
+    setIsEditing(false);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      [name]: value,
+    }));
   };
 
   return (
@@ -52,47 +70,75 @@ export default function MyPage() {
       </ImgContainer>
 
       {/* input */}
-      <InputWrapper>
-        <Input
-          label="Name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-        />
-
-        <Input
-          label="Country"
-          type="text"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-          placeholder="Country"
-        />
-        <Input
-          label="Address"
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          placeholder="Address"
-        />
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <FormatDiv>
-            Date Format
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+      {isEditing ? (
+        <>
+          <InputWrapper>
+            <InputLabel>Name</InputLabel>
+            <InputInfo
+              type="text"
+              name="name"
+              value={profile.name}
+              onChange={handleChange}
             />
-          </FormatDiv>
-          <FormatDiv>
-            Time Format
-            <input type="time" />
-          </FormatDiv>
+            <InputLabel>Country</InputLabel>
+            <InputInfo
+              type="text"
+              name="country"
+              value={profile.country}
+              onChange={handleChange}
+            />
+            <InputLabel>Address</InputLabel>
+            <InputInfo
+              type="text"
+              name="address"
+              value={profile.address}
+              onChange={handleChange}
+            />
+            <InputLabel>Birth Date</InputLabel>
+            <DatePicker
+              selected={profile.birthDate}
+              onChange={(date) =>
+                setProfile((prevProfile) => ({
+                  ...prevProfile,
+                  birthDate: date,
+                }))
+              }
+            />
+          </InputWrapper>
+        </>
+      ) : (
+        <div style={{ marginTop: "30px" }}>
+          <Div>
+            <InputLabel>Name</InputLabel>
+            {profile.name}
+          </Div>
+          <Div>
+            <InputLabel>Country</InputLabel>
+            {profile.country}
+          </Div>
+          <Div>
+            <InputLabel>Address</InputLabel>
+            {profile.address}
+          </Div>
+          <Div>
+            <InputLabel>Birth Date</InputLabel>
+            {profile.birthDate.toLocaleDateString()}
+          </Div>
         </div>
-      </InputWrapper>
+      )}
+
       <BtnWrapper>
         <div style={{ gap: "10px", display: "flex" }}>
-          <SaveProfile onClick={() => {}}>Save Changes</SaveProfile>
-          <CancelProfile onClick={() => {}}>Cancel</CancelProfile>
+          {isEditing ? (
+            <>
+              <SaveProfile onClick={handleSaveChanges}>
+                Save Changes
+              </SaveProfile>
+              <CancelProfile onClick={handleCancel}>Cancel</CancelProfile>
+            </>
+          ) : (
+            <EditProfile onClick={handleEdit}>Edit Profile</EditProfile>
+          )}
         </div>
         <DeleteProfile onClick={() => {}}>Delete Account</DeleteProfile>
       </BtnWrapper>
@@ -117,6 +163,7 @@ const ImgContainer = styled.div`
 `;
 const MainLabel = styled.h1`
   font-size: 24px;
+  color: #596e5a;
 `;
 
 const ProfileImgEditBtn = styled.button`
@@ -145,7 +192,6 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 15px;
-  gap: 20px;
 `;
 
 const BtnWrapper = styled.div`
@@ -158,7 +204,7 @@ const BtnWrapper = styled.div`
 const SaveProfile = styled.button`
   border-radius: 40px;
   border: none;
-  background-color: #0069ff;
+  background-color: #bccba4;
   color: white;
   font-size: 14px;
   cursor: pointer;
@@ -175,7 +221,7 @@ const CancelProfile = styled.button`
 const DeleteProfile = styled.button`
   border-radius: 40px;
   border: none;
-  background-color: #c84545;
+  background-color: #596e5a;
   color: white;
   font-size: 14px;
   cursor: pointer;
@@ -184,4 +230,31 @@ const DeleteProfile = styled.button`
 const FormatDiv = styled.div`
   display: flex;
   flex-direction: column;
+`;
+const EditProfile = styled.button`
+  border-radius: 40px;
+  border: none;
+  background-color: #bccba4;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 7px 18px;
+`;
+
+const InputInfo = styled.input`
+  margin-bottom: 20px;
+  border: 1px solid #bccba4;
+  border-radius: 10px;
+  height: 25px;
+`;
+
+const InputLabel = styled.label`
+  color: #596e5a;
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 `;

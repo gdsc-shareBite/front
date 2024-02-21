@@ -120,7 +120,7 @@ const BtnWrapper = styled.div`
 const SaveProfile = styled.button`
   border-radius: 40px;
   border: none;
-  background-color: #0069ff;
+  background-color: #bccba4;
   color: white;
   font-size: 14px;
   cursor: pointer;
@@ -137,7 +137,7 @@ const CancelProfile = styled.button`
 const DeleteProfile = styled.button`
   border-radius: 40px;
   border: none;
-  background-color: #c84545;
+  background-color: #596e5a;
   color: white;
   font-size: 14px;
   cursor: pointer;

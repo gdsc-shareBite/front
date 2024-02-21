@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import CustomDatePicker from "../components/CustomDatePicker";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [expirationDate, setExpirationDate] = useState(new Date());
@@ -8,6 +9,7 @@ export default function Register() {
   const [count, setCount] = useState(1);
   const [selectedTags, setSelectedTags] = useState({});
   const [photos, setPhotos] = useState([]);
+  const navigate = useNavigate();
 
   const handleIncrement = () => setCount((prevCount) => prevCount + 1);
   const handleDecrement = () =>
@@ -22,6 +24,12 @@ export default function Register() {
   const handlePhotoChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
     setPhotos(selectedFiles);
+  };
+  const handleRegister = () => {
+    alert("Registered!");
+  };
+  const handelCancel = () => {
+    navigate(-1);
   };
 
   return (
@@ -106,8 +114,8 @@ export default function Register() {
             </div>
           </ContentWrapper>
           <BtnWrapper>
-            <CancelBtn>Cancel</CancelBtn>
-            <RegisterBtn>Register</RegisterBtn>
+            <CancelBtn onClick={handelCancel}>Cancel</CancelBtn>
+            <RegisterBtn onClick={handleRegister}>Register</RegisterBtn>
           </BtnWrapper>
         </Wrapper>
       </div>
@@ -228,6 +236,10 @@ const CancelBtn = styled.button`
   padding: 10px;
   font-weight: bold;
   border-radius: 20px;
+  &:hover {
+    cursor: pointer;
+    background-color: #bccba4;
+  }
 `;
 
 const RegisterBtn = styled.button`
@@ -235,6 +247,10 @@ const RegisterBtn = styled.button`
   padding: 10px;
   font-weight: bold;
   border-radius: 20px;
+  &:hover {
+    cursor: pointer;
+    background-color: #859f71;
+  }
 `;
 
 const BtnWrapper = styled.div`
